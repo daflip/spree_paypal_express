@@ -76,7 +76,7 @@ module Spree
                                                   :address2   => ship_address["address2"],
                                                   :city       => ship_address["city"],
                                                   :country    => Spree::Country.find_by_iso(ship_address["country"]),
-                                                  :zipcode    => ship_address["zip"],
+                                                  :zipcode    => (ship_address["zip"].to_s.blank? ? '12345' : ship_address["zip"]),
                                                   # phone is currently blanked in AM's PPX response lib
                                                   :phone      => @ppx_details.params["phone"] || "(not given)"
 
