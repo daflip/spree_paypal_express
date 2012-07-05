@@ -32,11 +32,11 @@ module Spree
       opts.merge!(address_options(@order))
       @gateway = paypal_gateway
 
-      if Spree::Config[:auto_capture]
+      #if Spree::Config[:auto_capture]
         @ppx_response = @gateway.setup_purchase(opts[:money], opts)
-      else
-        @ppx_response = @gateway.setup_authorization(opts[:money], opts)
-      end
+        #else
+        #@ppx_response = @gateway.setup_authorization(opts[:money], opts)
+        #end
 
       unless @ppx_response.success?
         gateway_error(@ppx_response)
