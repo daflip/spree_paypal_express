@@ -70,7 +70,7 @@ module Spree
 
         unless payment_method.preferred_no_shipping
           ship_address = @ppx_details.address
-          order_ship_address = Spree::Address.new :firstname  => @ppx_details.params["first_name"],
+          order_ship_address = @order.ship_address.new :firstname  => @ppx_details.params["first_name"],
                                                   :lastname   => @ppx_details.params["last_name"],
                                                   :address1   => ship_address["address1"],
                                                   :address2   => ship_address["address2"],
