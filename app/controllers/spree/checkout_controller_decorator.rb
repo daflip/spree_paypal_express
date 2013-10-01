@@ -71,7 +71,7 @@ module Spree
         unless payment_method.preferred_no_shipping
           # envision mod
           ship_address = fixup_variables(@ppx_details.address) rescue @ppx_details.address
-          order_ship_address = @order.ship_address.new :firstname  => @ppx_details.params["first_name"].to_s.titlecase,
+          order_ship_address = @order.build_ship_address :firstname  => @ppx_details.params["first_name"].to_s.titlecase,
                                                   :lastname   => @ppx_details.params["last_name"].to_s.titlecase,
                                                   :address1   => ship_address["address1"],
                                                   :address2   => ship_address["address2"],
