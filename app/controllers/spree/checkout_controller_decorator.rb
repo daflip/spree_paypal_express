@@ -282,7 +282,7 @@ module Spree
       end
 
       opts = { :return_url        => paypal_confirm_order_checkout_url(order, :payment_method_id => payment_method),
-               :cancel_return_url => determine_order_url(order, :state => :payment),
+               :cancel_return_url => edit_order_checkout_url(order, :state => :payment),
                :order_id          => order.number,
                :custom            => order.number,
                :items             => items,
