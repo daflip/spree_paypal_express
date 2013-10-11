@@ -40,7 +40,7 @@ module Spree
 
       unless @ppx_response.success?
         gateway_error(@ppx_response)
-        redirect_to determine_order_path(@order, :state => "payment")
+        redirect_to determine_order_url(@order, :state => "payment")
         return
       end
 
@@ -50,10 +50,10 @@ module Spree
       redirect_to :back
     end
     
-    def determine_order_path(order, state)
-      cart_path
+    def determine_order_url(order, state)
+      cart_url
     rescue # non OPC 
-      edit_order_checkout_path(order, state: state)
+      edit_order_checkout_url(order, state: state)
     end
 
     def paypal_confirm
@@ -111,7 +111,7 @@ module Spree
         gateway_error(@ppx_details)
 
         #Failed trying to get payment details from PPX
-        redirect_to determine_order_path(@order, :state => "payment")
+        redirect_to determine_order_url(@order, :state => "payment")
       end
     rescue ActiveMerchant::ConnectionError => e
       gateway_error I18n.t(:unable_to_connect_to_gateway)
@@ -173,7 +173,7 @@ module Spree
         gateway_error(ppx_auth_response)
 
         #Failed trying to complete pending payment!
-        redirect_to determine_order_path(@order, :state => "payment")
+        redirect_to determine_order_url(@order, :state => "payment")
       end
     rescue ActiveMerchant::ConnectionError => e
       gateway_error I18n.t(:unable_to_connect_to_gateway)
@@ -282,7 +282,7 @@ module Spree
       end
 
       opts = { :return_url        => paypal_confirm_order_checkout_url(order, :payment_method_id => payment_method),
-               :cancel_return_url => determine_order_path(order, :state => :payment),
+               :cancel_return_url => determine_order_url(order, :state => :payment),
                :order_id          => order.number,
                :custom            => order.number,
                :items             => items,
