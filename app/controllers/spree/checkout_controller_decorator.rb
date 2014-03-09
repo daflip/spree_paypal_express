@@ -165,6 +165,7 @@ module Spree
 
         @order.finalize!
         flash[:notice] = I18n.t(:order_processed_successfully)
+        flash[:commerce_tracking] = "nothing special"                                                                                                                                                                    
         redirect_to completion_route
 
       else
