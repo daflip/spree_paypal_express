@@ -51,9 +51,9 @@ module Spree
     end
     
     def determine_order_url(order, state)
-      cart_url
+      cart_url(utm_nooverride: 1)
     rescue # non OPC 
-      edit_order_checkout_url(order, state: state)
+      edit_order_checkout_url(order, utm_nooverride: 1, state: state)
     end
 
     def paypal_confirm
@@ -165,7 +165,7 @@ module Spree
 
         @order.finalize!
         flash[:notice] = I18n.t(:order_processed_successfully)
-        flash[:commerce_tracking] = "nothing special"                                                                                                                                                                    
+        flash[:commerce_tracking] = "nothing special"
         redirect_to completion_route
 
       else
@@ -230,7 +230,7 @@ module Spree
         :background_color        => "ffffff",  # must be hex only, six chars
         :header_background_color => "ffffff",
         :header_border_color     => "ffffff",
-  :header_image    => chosen_image,
+        :header_image    => chosen_image,
         :allow_note              => true,
         :locale                  => user_locale,
         :req_confirm_shipping    => false,   # for security, might make an option later
