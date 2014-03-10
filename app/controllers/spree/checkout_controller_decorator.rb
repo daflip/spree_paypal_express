@@ -166,7 +166,7 @@ module Spree
         @order.finalize!
         flash[:notice] = I18n.t(:order_processed_successfully)
         flash[:commerce_tracking] = "nothing special"
-        redirect_to completion_route
+        redirect_to paypal_completion_route
 
       else
         payment.failure!
@@ -182,6 +182,11 @@ module Spree
     end
 
     private
+
+    def paypal_completion_route
+      return order_path(@order, utm_nooverride: 1) if current_user                                                                         
+      spree.token_order_path(@order, @order.token, utm_nooverride: 1)                                                                      
+    end
 
     def asset_url(_path)
       URI::HTTP.build(:path => ActionController::Base.helpers.asset_path(_path), :host => Spree::Config[:site_url]).to_s
