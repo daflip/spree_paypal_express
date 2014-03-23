@@ -209,7 +209,7 @@ module Spree
         return 
       end
 
-      load_order
+      load_order # Sun 23 Mar 2014 20:33:08 NZDT - do we really need this? seems not!
       payment_method = Spree::PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
 
       if payment_method.kind_of?(Spree::BillingIntegration::PaypalExpress) || payment_method.kind_of?(Spree::BillingIntegration::PaypalExpressUk)
