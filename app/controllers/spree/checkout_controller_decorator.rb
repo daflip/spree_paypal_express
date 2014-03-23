@@ -204,6 +204,9 @@ module Spree
         if params[:order][:coupon_code] and !params[:order][:coupon_code].blank? and @order.coupon_code.present?
           fire_event('spree.checkout.coupon_code_added', :coupon_code => @order.coupon_code)
         end
+      elsif respond_to? :redisplay
+        redisplay('Please fill in required fields.')
+        return 
       end
 
       load_order
