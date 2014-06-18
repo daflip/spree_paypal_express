@@ -316,7 +316,7 @@ module Spree
 
     def address_options(order)
       #if payment_method.preferred_no_shipping
-      #{ :no_shipping => true }
+      return({ :no_shipping => true })
       #else
       {
         :no_shipping => false,
