@@ -9,11 +9,12 @@ module Spree
       @gateway = paypal_gateway
 
       #if Spree::Config[:auto_capture]
-        @ppx_response = @gateway.setup_purchase(opts[:money], opts)
-        #else
-        #@ppx_response = @gateway.setup_authorization(opts[:money], opts)
-        #end
+      @ppx_response = @gateway.setup_purchase(opts[:money], opts)
+      #else
+      #@ppx_response = @gateway.setup_authorization(opts[:money], opts)
+      #end
 
+      puts "PayPal DEBUG: #{@gateway.instance_variable_get(:@options)).inspect}" rescue nil
       unless @ppx_response.success?
         puts "Gateway Error: PayPal Opts were: #{opts.inspect}"
         gateway_error(@ppx_response)
