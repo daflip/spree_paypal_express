@@ -15,6 +15,7 @@ module Spree
         #end
 
       unless @ppx_response.success?
+        puts "Gateway Error: PayPal Opts were: #{opts.inspect}"
         gateway_error(@ppx_response)
         redirect_to edit_order_url(@order)
         return
@@ -336,14 +337,15 @@ module Spree
 
     def all_opts(order, payment_method, stage=nil)
       opts = fixed_opts.merge(order_opts(order, payment_method, stage)).merge(paypal_site_opts)
-
+      puts "PayPal Debug 1: #{opts.inspect}"
       if stage == "payment"
+        puts "PayPal Debug 2: stage is payment.."
         opts.merge! flat_rate_shipping_and_handling_options(order, stage)
       end
-
+      puts "PayPal Debug 3: #{opts.inspect}"
       # suggest current user's email or any email stored in the order
       opts[:email] = current_user ? current_user.email : order.email
-
+      puts "PayPal Debug 4: #{opts.inspect}"
       opts
     end
 
