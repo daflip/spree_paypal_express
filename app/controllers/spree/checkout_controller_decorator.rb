@@ -14,7 +14,7 @@ module Spree
       #@ppx_response = @gateway.setup_authorization(opts[:money], opts)
       #end
 
-      puts "PayPal DEBUG: #{@gateway.instance_variable_get(:@options).inspect}" rescue nil
+      puts "PayPal DEBUG: #{@gateway.instance_variable_get(:@options).inspect}" rescue puts "PayPal DEBUG Hup: #{$!}"
       unless @ppx_response.success?
         puts "Gateway Error: PayPal Opts were: #{opts.inspect}"
         gateway_error(@ppx_response)
