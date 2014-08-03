@@ -232,6 +232,8 @@ module Spree
           chosen_image = Spree::Config[:logo]
       else
           chosen_image = asset_url(Spree::Config[:logo])
+          # make it a https url if we're in production Sun 03 Aug 2014 21:55:24 
+          chosen_image.sub!(/^http\:/, "https:") if Rails.env.production?
       end
 
 
