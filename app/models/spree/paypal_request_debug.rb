@@ -4,8 +4,11 @@ module ActiveMerchant #:nodoc:
     module PaypalCommonAPI
 
       def commit(action, request)
-        puts "PayPal REQUEST DEBUG: #{action} "
-        puts "#{request.inspect}"
+        puts "=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        puts "PayPal REQUEST DEBUG: #{action}: #{request.inspect} "
+        puts "headers: #{@options.inspect}"
+        puts "full request: #{build_request(request).inspect} "
+        puts "=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
         response = parse(action, ssl_post(endpoint_url, build_request(request), @options[:headers]))
         puts "#{response.inspect}"
         build_response(successful?(response), message_from(response), response,
