@@ -8,6 +8,7 @@ module ActiveMerchant #:nodoc:
         puts "PayPal REQUEST DEBUG: #{action}: #{request.inspect} "
         puts "headers: #{@options.inspect}"
         puts "full request: #{build_request(request).inspect} "
+        puts "endpoint URL: #{endpoint_url.inspect}"
         puts "=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
         response = parse(action, ssl_post(endpoint_url, build_request(request), @options[:headers]))
         puts "#{response.inspect}"
