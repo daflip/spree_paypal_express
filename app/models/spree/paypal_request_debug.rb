@@ -9,6 +9,7 @@ module ActiveMerchant #:nodoc:
         puts "headers: #{@options.inspect}"
         puts "full request: #{build_request(request).inspect} "
         puts "endpoint URL: #{endpoint_url.inspect}"
+        puts "backtrace: #{caller}"
         puts "=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
         response = parse(action, ssl_post(endpoint_url, build_request(request), @options[:headers]))
         puts "#{response.inspect}"
